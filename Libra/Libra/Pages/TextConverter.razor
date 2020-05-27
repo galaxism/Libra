@@ -1,7 +1,43 @@
-﻿@page "/textconverter";
+﻿@page "/text/converter";
 
 <AntTitle>Text Converter</AntTitle>
 
-@code {
+<div>
+    <AntParagraph Strong="true">From: Raw Text</AntParagraph>
+    <div>
+        <input style="width:100%" type="text" @bind="@OriginalText" />
+    </div>
+    <AntDivider></AntDivider>
+    @*<AntButton Class="converter-button" OnClick="ConvertString">Convert</AntButton>*@
+    <AntParagraph Strong="true">To: Upper Case</AntParagraph>
+    <div><AntText>@convertedText</AntText></div>
+</div>
 
+@code {
+    string originalText = string.Empty;
+    public string OriginalText {
+        get { return originalText; }
+        set { originalText = value; ConvertString(); }
+    }
+
+    string convertedText = string.Empty;
+
+    public void ConvertString()
+    {
+        try
+        {
+            convertedText = originalText.ToUpper();
+        }
+        catch
+        {
+            convertedText = string.Empty;
+        }
+
+    }
 }
+
+<style>
+    .converter-button{
+        margin:20px
+    }
+</style>
